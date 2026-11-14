@@ -94,11 +94,11 @@ def synthesize_answer(
         )
 
     primary_model = (
-        os.getenv("GEMINI_MODEL", "gemini-3.8-flash").strip() or "gemini-3.8-flash"
+        os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite").strip() or "gemini-3.5-flash-lite"
     )
     fallback_model = (
-        os.getenv("GEMINI_FALLBACK_MODEL", "gemini-3.5-flash-lite").strip()
-        or "gemini-3.5-flash-lite"
+        os.getenv("GEMINI_FALLBACK_MODEL", "gemini-3.8-flash").strip()
+        or "gemini-3.8-flash"
     )
     candidate_models = list(
         dict.fromkeys([primary_model, fallback_model, "gemini-3.1-flash-lite"])

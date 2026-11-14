@@ -196,8 +196,8 @@ class Qwen3Reranker:
             reranked.sort(key=lambda item: item["rerankScore"], reverse=True)
             return reranked[:top_n], True
         except Exception as exc:  # pragma: no cover - defensive offline/OOM fallback
-            logger.exception(
-                "Qwen3 reranker unavailable (%s); falling back to bi-encoder order.", exc
+            logger.info(
+                "Qwen3 reranker skipped or unavailable (%s); using bi-encoder / lightweight order.", exc
             )
             fallback: list[dict[str, Any]] = []
             for doc in candidates[:top_n]:
