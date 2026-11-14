@@ -54,6 +54,11 @@ class QdrantVectorStore:
         if self._embedder is None:
             with self._lock:
                 if self._embedder is None:
+                    try:
+                        import torch
+                        torch.set_num_threads(2)
+                    except Exception:
+                        pass
                     from sentence_transformers import SentenceTransformer
                     logger.info("Loading bi-encoder model: %s", self.embedding_model_name)
                     model = SentenceTransformer(self.embedding_model_name)

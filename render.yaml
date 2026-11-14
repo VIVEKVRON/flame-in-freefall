@@ -15,5 +15,7 @@ services:
         value: "*"
       - key: QDRANT_PATH
         value: ./qdrant_data
+      - key: DISABLE_RERANKER
+        value: "true"
       - key: GEMINI_API_KEY
         sync: false

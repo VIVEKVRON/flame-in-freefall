@@ -42,16 +42,37 @@ class Qwen3Reranker:
             if self._model is not None and self._tokenizer is not None:
                 return
 
-            if os.getenv("DISABLE_RERANKER", "").lower() in ("true", "1", "yes"):
-                logger.info("Reranker explicitly disabled via DISABLE_RERANKER.")
+            if (
+                os.getenv("DISABLE_RERANKER", "").lower() in ("true", "1", "yes")
+                or os.getenv("RENDER")
+            ):
+                logger.info("Reranker disabled via DISABLE_RERANKER or detected Render cloud environment.")
                 return
+
+            # Check container cgroup memory limits if running in Docker/Render
+            for cgroup_path in (
+                "/sys/fs/cgroup/memory.max",
+                "/sys/fs/cgroup/memory/memory.limit_in_bytes",
+            ):
+                if os.path.exists(cgroup_path):
+                    try:
+                        with open(cgroup_path, "r", encoding="utf-8") as f:
+                            raw = f.read().strip()
+                            if raw and raw != "max" and int(raw) < 1.5 * 1024**3:
+                                logger.warning(
+                                    "Container cgroup memory limit (%.1f MB) < 1.5 GB; skipping Qwen3 to prevent OOM.",
+                                    int(raw) / (1024 * 1024),
+                                )
+                                return
+                    except Exception:
+                        pass
 
             try:
                 import psutil
                 mem = psutil.virtual_memory()
-                if mem.total < 1.2 * 1024**3:
+                if mem.total < 1.5 * 1024**3:
                     logger.warning(
-                        "System RAM (%.1f MB) is below 1.2 GB; skipping Qwen3 to avoid OOM.",
+                        "System RAM (%.1f MB) is below 1.5 GB; skipping Qwen3 to avoid OOM.",
                         mem.total / (1024 * 1024),
                     )
                     return
