@@ -42,6 +42,22 @@ class Qwen3Reranker:
             if self._model is not None and self._tokenizer is not None:
                 return
 
+            if os.getenv("DISABLE_RERANKER", "").lower() in ("true", "1", "yes"):
+                logger.info("Reranker explicitly disabled via DISABLE_RERANKER.")
+                return
+
+            try:
+                import psutil
+                mem = psutil.virtual_memory()
+                if mem.total < 1.2 * 1024**3:
+                    logger.warning(
+                        "System RAM (%.1f MB) is below 1.2 GB; skipping Qwen3 to avoid OOM.",
+                        mem.total / (1024 * 1024),
+                    )
+                    return
+            except Exception:
+                pass
+
             import torch
             from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -85,8 +101,8 @@ class Qwen3Reranker:
 
     def _score_pairs(self, pairs: list[str]) -> list[float]:
         self._ensure_loaded()
-        assert self._tokenizer is not None
-        assert self._model is not None
+        if self._model is None or self._tokenizer is None:
+            raise RuntimeError("Qwen3 reranker is unavailable or skipped on memory-constrained host.")
         assert self._token_false_id is not None
         assert self._token_true_id is not None
 
