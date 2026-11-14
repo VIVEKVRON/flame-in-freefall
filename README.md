@@ -4,6 +4,8 @@
 **Developed by Team Vetris (Vivek V Ron)**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Live Frontend](https://img.shields.io/badge/Vercel-Live%20Demo-black.svg?logo=vercel)](https://flame-in-freefall-nine.vercel.app)
+[![Live API](https://img.shields.io/badge/Render-Live%20Backend-46E3B7.svg?logo=render)](https://flame-in-freefall-backend-51rf.onrender.com/api/health)
 [![Next.js 16](https://img.shields.io/badge/Frontend-Next.js%2016-black.svg?logo=next.dot.js)](https://nextjs.org/)
 [![Flask 3.1](https://img.shields.io/badge/Backend-Flask%203.1-000000.svg?logo=flask)](https://flask.palletsprojects.com/)
 [![Qdrant Vector DB](https://img.shields.io/badge/Vector%20Store-Qdrant%20Local-red.svg?logo=qdrant)](https://qdrant.tech/)
@@ -169,12 +171,16 @@ npm run dev
 
 ---
 
-## 6. Cloud Deployment Architecture
+## 6. Cloud Deployment Architecture & Live Links
 
-The application is architected for zero-friction cloud deployment:
+The application is deployed across multi-cloud infrastructure:
 
-- **Backend (Render):** Managed via `render.yaml` Blueprint as a Python Web Service. Gunicorn runs with `--workers 1 --threads 4 --timeout 180` to safely read the persistent local Qdrant store while allocating enough time for Qwen3 reranker loading.
-- **Frontend (Vercel):** Deployed with Root Directory configured to `frontend`, passing `NEXT_PUBLIC_API_URL` to connect to the live Render backend.
+- **Frontend (Vercel):** [https://flame-in-freefall-nine.vercel.app](https://flame-in-freefall-nine.vercel.app)
+  - Deployed from `frontend/` directory with `NEXT_PUBLIC_API_URL` pointing to the live Render backend.
+  - Zero-latency Edge-cached Next.js App Router with automatic ISR and static optimization.
+- **Backend (Render):** [https://flame-in-freefall-backend-51rf.onrender.com](https://flame-in-freefall-backend-51rf.onrender.com)
+  - Health check endpoint: [`/api/health`](https://flame-in-freefall-backend-51rf.onrender.com/api/health) (validates 9 pre-indexed NASA technical vectors in persistent local Qdrant).
+  - Managed via `render.yaml` Blueprint as a Python Web Service. Gunicorn runs with `--workers 1 --threads 4 --timeout 180` to safely manage the persistent local Qdrant store while allocating enough time for Qwen3 reranker loading with memory-aware lazy loading.
 
 ---
 
