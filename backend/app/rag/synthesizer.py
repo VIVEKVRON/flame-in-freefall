@@ -131,19 +131,19 @@ def synthesize_answer(
     client = genai.Client(
         api_key=api_key,
         http_options=types.HttpOptions(
-            timeout=25000,
+            timeout=10000,
             retry_options=types.HttpRetryOptions(attempts=1),
         ),
     )
 
-    for model_name in candidate_models:
+    for model_name in candidate_models[:2]:
         try:
             interaction = client.interactions.create(
                 model=model_name,
                 input=user_input,
                 system_instruction=system_instruction,
                 store=False,
-                timeout=25.0,
+                timeout=10.0,
                 response_format={
                     "type": "text",
                     "mime_type": "application/json",
