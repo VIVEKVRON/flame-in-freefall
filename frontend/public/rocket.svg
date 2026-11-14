@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 400" fill="none">
+  <defs>
+    <!-- Central External Tank gradients -->
+    <linearGradient id="etBody" x1="88" y1="60" x2="172" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4A5565"/>
+      <stop offset="28%" stop-color="#B8C7D6"/>
+      <stop offset="58%" stop-color="#E7EFF6"/>
+      <stop offset="82%" stop-color="#7D8C9E"/>
+      <stop offset="100%" stop-color="#394352"/>
+    </linearGradient>
+    <linearGradient id="etNose" x1="96" y1="30" x2="164" y2="30" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7A2D00"/>
+      <stop offset="40%" stop-color="#E35F00"/>
+      <stop offset="68%" stop-color="#FF852B"/>
+      <stop offset="100%" stop-color="#6B2400"/>
+    </linearGradient>
+
+    <!-- SRB cylindrical body -->
+    <linearGradient id="srbBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B8492"/>
+      <stop offset="32%" stop-color="#EBF1F6"/>
+      <stop offset="62%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#66707E"/>
+    </linearGradient>
+    <linearGradient id="srbOrange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8A3500"/>
+      <stop offset="40%" stop-color="#FF6B00"/>
+      <stop offset="70%" stop-color="#FF8C2A"/>
+      <stop offset="100%" stop-color="#702800"/>
+    </linearGradient>
+    <linearGradient id="darkSkirt" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#11151D"/>
+      <stop offset="45%" stop-color="#434C5B"/>
+      <stop offset="100%" stop-color="#0E1117"/>
+    </linearGradient>
+
+    <!-- Orbiter fuselage & delta wings -->
+    <linearGradient id="orbiterHull" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C8D2DE"/>
+      <stop offset="35%" stop-color="#FFFFFF"/>
+      <stop offset="68%" stop-color="#F6F9FC"/>
+      <stop offset="100%" stop-color="#A6B3C2"/>
+    </linearGradient>
+    <linearGradient id="wingSurface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="75%" stop-color="#DCE4EE"/>
+      <stop offset="100%" stop-color="#A8B4C4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ================= CENTRAL EXTERNAL TANK ================= -->
+  <!-- Tank Nose Tip -->
+  <path d="M130 4 C135 10 138 16 140 22 L120 22 C122 16 125 10 130 4 Z" fill="#181C24"/>
+  <!-- Orange Tank Ogive -->
+  <path d="M120 22 C108 38 98 54 94 70 L166 70 C162 54 152 38 140 22 Z" fill="url(#etNose)"/>
+  <!-- Metallic Tank Body -->
+  <path d="M94 70 C91 92 90 120 90 156 L90 315 L170 315 L170 156 C170 120 169 92 166 70 Z" fill="url(#etBody)"/>
+  <!-- External Tank Structural Panel Seams -->
+  <line x1="92" y1="112" x2="168" y2="112" stroke="rgba(25,34,46,0.35)" stroke-width="1"/>
+  <line x1="90" y1="158" x2="170" y2="158" stroke="rgba(25,34,46,0.35)" stroke-width="1"/>
+  <line x1="90" y1="205" x2="170" y2="205" stroke="rgba(25,34,46,0.35)" stroke-width="1"/>
+  <line x1="130" y1="70" x2="130" y2="220" stroke="rgba(25,34,46,0.28)" stroke-width="1"/>
+
+  <!-- ================= LEFT SOLID ROCKET BOOSTER ================= -->
+  <g>
+    <!-- Nose tip & cone -->
+    <path d="M72 72 C74 76 76 80 77 84 L67 84 C68 80 70 76 72 72 Z" fill="#181C24"/>
+    <path d="M67 84 C61 96 58 106 58 118 L86 118 C86 106 83 96 77 84 Z" fill="url(#srbBody)"/>
+    <!-- Orange band -->
+    <rect x="58" y="118" width="28" height="24" fill="url(#srbOrange)"/>
+    <!-- Main cylindrical body -->
+    <rect x="58" y="142" width="28" height="162" fill="url(#srbBody)"/>
+    <line x1="58" y1="184" x2="86" y2="184" stroke="rgba(20,26,35,0.45)" stroke-width="1.2"/>
+    <line x1="58" y1="226" x2="86" y2="226" stroke="rgba(20,26,35,0.45)" stroke-width="1.2"/>
+    <line x1="58" y1="268" x2="86" y2="268" stroke="rgba(20,26,35,0.45)" stroke-width="1.2"/>
+    <!-- Flared dark booster skirt & nozzle -->
+    <path d="M58 300 C54 316 51 334 50 350 L94 350 C93 334 90 316 86 300 Z" fill="url(#darkSkirt)"/>
+    <ellipse cx="72" cy="350" rx="22" ry="3.5" fill="#141820" stroke="rgba(255,255,255,0.25)" stroke-width="0.8"/>
+  </g>
+
+  <!-- ================= RIGHT SOLID ROCKET BOOSTER ================= -->
+  <g>
+    <path d="M188 72 C190 76 192 80 193 84 L183 84 C184 80 186 76 188 72 Z" fill="#181C24"/>
+    <path d="M183 84 C177 96 174 106 174 118 L202 118 C202 106 199 96 193 84 Z" fill="url(#srbBody)"/>
+    <rect x="174" y="118" width="28" height="24" fill="url(#srbOrange)"/>
+    <rect x="174" y="142" width="28" height="162" fill="url(#srbBody)"/>
+    <line x1="174" y1="184" x2="202" y2="184" stroke="rgba(20,26,35,0.45)" stroke-width="1.2"/>
+    <line x1="174" y1="226" x2="202" y2="226" stroke="rgba(20,26,35,0.45)" stroke-width="1.2"/>
+    <line x1="174" y1="268" x2="202" y2="268" stroke="rgba(20,26,35,0.45)" stroke-width="1.2"/>
+    <path d="M174 300 C170 316 167 334 166 350 L210 350 C209 334 206 316 202 300 Z" fill="url(#darkSkirt)"/>
+    <ellipse cx="188" cy="350" rx="22" ry="3.5" fill="#141820" stroke="rgba(255,255,255,0.25)" stroke-width="0.8"/>
+  </g>
+
+  <!-- ================= FOREGROUND WINGED ORBITER ================= -->
+  <!-- Delta Wings (black thermal leading edge + white upper wing) -->
+  <path d="M104 196 L78 266 L32 316 L36 324 L106 324 L154 324 L224 324 L228 316 L182 266 L156 196 Z" fill="#12161E"/>
+  <path d="M105 204 L82 268 L39 318 L106 318 L154 318 L221 318 L178 268 L155 204 Z" fill="url(#wingSurface)"/>
+  <!-- Wing Elevon Panel Lines -->
+  <line x1="46" y1="312" x2="98" y2="312" stroke="rgba(30,40,55,0.35)" stroke-width="1"/>
+  <line x1="162" y1="312" x2="214" y2="312" stroke="rgba(30,40,55,0.35)" stroke-width="1"/>
+
+  <!-- Orbiter Main Fuselage & Nose -->
+  <path d="M130 120 C142 132 152 158 156 194 L156 332 L104 332 L104 194 C108 158 118 132 130 120 Z" fill="url(#orbiterHull)"/>
+  <!-- Black RCC Nose Cap -->
+  <path d="M130 120 C138 128 145 141 149 156 C138 147 122 147 111 156 C115 141 122 128 130 120 Z" fill="#151922"/>
+
+  <!-- Segmented Cockpit Windshields -->
+  <path d="M114 176 L120 170 L122 178 L115 183 Z" fill="#0B1320"/>
+  <path d="M122 169 L129 167 L129 175 L123 177 Z" fill="#0B1320"/>
+  <path d="M131 167 L138 169 L137 177 L131 175 Z" fill="#0B1320"/>
+  <path d="M140 170 L146 176 L145 183 L138 178 Z" fill="#0B1320"/>
+
+  <!-- Payload Bay Center Door Seam & Ticks -->
+  <line x1="130" y1="186" x2="130" y2="306" stroke="rgba(35,45,60,0.45)" stroke-width="1.1"/>
+  <line x1="106" y1="226" x2="154" y2="226" stroke="rgba(35,45,60,0.22)" stroke-width="0.9"/>
+  <line x1="106" y1="264" x2="154" y2="264" stroke="rgba(35,45,60,0.22)" stroke-width="0.9"/>
+
+  <!-- OMS Pods (Twin Rear Engine Housings) -->
+  <rect x="100" y="302" width="26" height="36" rx="5" fill="url(#orbiterHull)" stroke="rgba(35,45,60,0.35)" stroke-width="1"/>
+  <rect x="134" y="302" width="26" height="36" rx="5" fill="url(#orbiterHull)" stroke="rgba(35,45,60,0.35)" stroke-width="1"/>
+
+  <!-- Vertical Tail Fin Spine -->
+  <rect x="127" y="274" width="6" height="58" rx="3" fill="#E3EAF2" stroke="rgba(30,40,55,0.4)" stroke-width="0.9"/>
+
+  <!-- Twin SSME Main Engine Bells -->
+  <path d="M104 338 L124 338 L129 366 L99 366 Z" fill="url(#darkSkirt)"/>
+  <ellipse cx="114" cy="366" rx="15" ry="3" fill="#1A1F29" stroke="rgba(255,107,0,0.65)" stroke-width="0.9"/>
+
+  <path d="M136 338 L156 338 L161 366 L131 366 Z" fill="url(#darkSkirt)"/>
+  <ellipse cx="146" cy="366" rx="15" ry="3" fill="#1A1F29" stroke="rgba(255,107,0,0.65)" stroke-width="0.9"/>
+</svg>
