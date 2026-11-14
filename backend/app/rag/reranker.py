@@ -8,9 +8,6 @@ import os
 import threading
 from typing import Any
 
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
 logger = logging.getLogger(__name__)
 
 DEFAULT_TASK_INSTRUCTION = (
@@ -33,7 +30,7 @@ class Qwen3Reranker:
         self._token_true_id: int | None = None
         self._prefix_tokens: list[int] = []
         self._suffix_tokens: list[int] = []
-        self._device: str = "cuda" if torch.cuda.is_available() else "cpu"
+        self._device: str = os.getenv("TORCH_DEVICE", "cpu")
         self.model_name = os.getenv("RERANKER_MODEL", "Qwen/Qwen3-Reranker-0.6B")
         self.max_length = 2048
 
@@ -44,6 +41,12 @@ class Qwen3Reranker:
         with self._lock:
             if self._model is not None and self._tokenizer is not None:
                 return
+
+            import torch
+            from transformers import AutoModelForCausalLM, AutoTokenizer
+
+            if torch.cuda.is_available():
+                self._device = "cuda"
 
             logger.info(
                 "Lazy-loading Qwen3 reranker '%s' on device=%s...",
@@ -106,6 +109,8 @@ class Qwen3Reranker:
             return_tensors="pt",
         )
         inputs = {k: v.to(self._device) for k, v in padded.items()}
+
+        import torch
 
         with torch.no_grad():
             outputs = self._model(**inputs)

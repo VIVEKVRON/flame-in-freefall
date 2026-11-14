@@ -11,7 +11,6 @@ from typing import Any
 
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, PointStruct, VectorParams
-from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +54,7 @@ class QdrantVectorStore:
         if self._embedder is None:
             with self._lock:
                 if self._embedder is None:
+                    from sentence_transformers import SentenceTransformer
                     logger.info("Loading bi-encoder model: %s", self.embedding_model_name)
                     model = SentenceTransformer(self.embedding_model_name)
                     dim_fn = getattr(
